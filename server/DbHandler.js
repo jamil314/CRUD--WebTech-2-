@@ -24,3 +24,9 @@ exports.registerUser = (name, email, username, password, callback) => {
         callback(null, results);
     });
 }
+
+exports.loginUser = (username, password, callback) => {
+    pool.query(`select * from user where username = '${username}' and password = '${password}'`, (err, results) => {
+        callback(results.length > 0);
+    });
+}

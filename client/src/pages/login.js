@@ -18,6 +18,11 @@ function Login() {
     })
     const data = await response.json();
     console.log(data);
+    if(data.code === 200){
+      localStorage.setItem('token', data.token);
+      window.location.href = '/home';
+      console.log(localStorage.getItem('token'));
+    }
   }
 
   return (
