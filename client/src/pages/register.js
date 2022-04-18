@@ -91,6 +91,7 @@ function Register() {
           type="text" 
           placeholder="Username" 
         />
+        <br/>
         <a style={{color:usernameValidationColor}}>
             {usernameValidationMsg}
         </a>
@@ -101,6 +102,7 @@ function Register() {
           type="text" 
           placeholder="Password" 
         />
+        <br/>
         <a style={{color:passwordLengthValidationColor}}>
             {passwordLengthValidationMsg}
         </a>
@@ -110,6 +112,7 @@ function Register() {
           type="text" 
           placeholder="Confirm Password" 
         />
+        <br/>
         <a style={{color:passwordValidationColor}}>
             {passwordValidationMsg}
         </a>

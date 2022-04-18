@@ -32,7 +32,7 @@ app.post('/api/login', (req, res) => {
                         { 
                             username: req.body.username 
                         }, 'verysecretkey', { 
-                            expiresIn: '1h' 
+                            expiresIn: '30s' 
                         }
                         )
                     res.json({code: 200, message: 'login sucessful', token: token})

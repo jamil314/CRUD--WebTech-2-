@@ -1,4 +1,6 @@
+import './../App.css'
 import React, { useState } from "react";
+import App from "../App";
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -21,12 +23,12 @@ function Login() {
     if(data.code === 200){
       localStorage.setItem('token', data.token);
       window.location.href = '/home';
-      console.log(localStorage.getItem('token'));
     }
   }
 
   return (
     <div class='App'>
+      <h1>Login</h1>
       <form onSubmit={loginUser}>
         <input
           value={username} 
