@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Menu from './menu'
 const Home = () => { 
   async function authUser(){
     const response = await fetch('http://localhost:3001/api/auth', {
@@ -17,9 +18,9 @@ const Home = () => {
 	}, [])
 
   return (
-    <div className="App">
-        <h1>Home</h1>
-    </div>
+    <><Menu /><div className="App">
+      <h1>Home</h1>
+    </div></>
   );
 }
 

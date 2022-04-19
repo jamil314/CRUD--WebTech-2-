@@ -1,6 +1,5 @@
 import './../App.css'
 import React, { useState } from "react";
-import App from "../App";
 
 function Login() {
 
