@@ -7,6 +7,24 @@ const jwt = require('jsonwebtoken')
 app.use(cors())
 app.use(express.json())
 
+app.get('/api/auth', (req, res) =>{
+    const token = req.headers['x-access-token']
+    // const token='rewrwer'
+    try {
+        if(jwt.verify(token, 'verysecretkey')){
+            console.log('Token valid')
+            res.json({code:200})
+        }else {
+            console.log('Token invalid')
+            res.json({code:403})
+        }
+    } catch (TokenExpiredError) {
+        console.log('Token expired')
+        res.json({code:403})
+    }
+})
+
+
 app.post('/api/register', (req, res) => {
     console.log(req.body)
     DbHandler.userExists(req.body.username, (exists) => {

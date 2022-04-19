@@ -54,7 +54,7 @@ function Register() {
     const data = await response.json();
     console.log(data);
     setUsernameValidationMsg(data.message)
-    setUsernameValidationColor(data.code==200 ? 'green' : 'red')
+    setUsernameValidationColor(data.code===200 ? 'green' : 'red')
   }
 
     function validatePassword(confirmPassword){
@@ -92,9 +92,9 @@ function Register() {
           placeholder="Username" 
         />
         <br/>
-        <a style={{color:usernameValidationColor}}>
+        <p style={{color:usernameValidationColor}}>
             {usernameValidationMsg}
-        </a>
+        </p>
         <br/>
         <input
           value={password} 
@@ -103,9 +103,9 @@ function Register() {
           placeholder="Password" 
         />
         <br/>
-        <a style={{color:passwordLengthValidationColor}}>
+        <p style={{color:passwordLengthValidationColor}}>
             {passwordLengthValidationMsg}
-        </a>
+        </p>
         <br/>
         <input
           onChange={e => validatePassword(e.target.value)}
@@ -113,11 +113,14 @@ function Register() {
           placeholder="Confirm Password" 
         />
         <br/>
-        <a style={{color:passwordValidationColor}}>
+        <p style={{color:passwordValidationColor}}>
             {passwordValidationMsg}
-        </a>
+        </p>
         <br/>
         <input type="submit" value="Register" />
+        <br/>
+        <p>Have an account?</p>
+        <a href="/login">Log in</a>
       </form>
     </div>
   );

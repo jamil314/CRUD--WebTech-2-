@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import App from "../App";
 
 function Login() {
+
+  console.log("We are in login")
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -45,6 +48,9 @@ function Login() {
         />
         <br/>
         <input type="submit" value="Login" />
+        <br/>
+        <p>Don't have an account?</p>
+        <a href="/register">Register now</a>
       </form>
     </div>
   );

@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useJwt } from "react-jwt";
-const Home = () => {
-  console.log("Home is running");
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const { decodedToken, isExpired } = useJwt(token);
-  console.log(decodedToken);
-  console.log(isExpired);
-  if(decodedToken == null){
-    console.log("No token");
-    console.log(decodedToken);
-    // localStorage.removeItem("token");
-    // window.location.href = "/login";
+import React, { useEffect } from "react";
+const Home = () => { 
+  async function authUser(){
+    const response = await fetch('http://localhost:3001/api/auth', {
+      method: 'GET',
+      headers: {
+        'x-access-token': localStorage.getItem('token')
+      },
+    })
+    const res = await response.json();
+    console.log(res);
+    if(res.code === 403) 
+      window.location.href = '/login';
   }
-
+  useEffect(() => {
+    authUser()
+	}, [])
 
   return (
     <div className="App">
