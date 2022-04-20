@@ -30,6 +30,10 @@ function Register() {
     })
     const data = await response.json();
     console.log(data);
+    if(data.status === 'ok'){ 
+      alert('Registered User')
+      window.location.href = '/login';
+    }
   }
 
   async function validateUsename(tempUserName){

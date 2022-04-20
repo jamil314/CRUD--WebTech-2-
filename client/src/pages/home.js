@@ -1,25 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from './menu'
-const Home = () => { 
-  async function authUser(){
-    const response = await fetch('http://localhost:3001/api/auth', {
+const Home = () => {
+  const [stories, setStories] = useState([])
+
+  async function getStories(){
+    console.log('getting stories')
+    const response = await fetch('http://localhost:3001/api/getsories', {
       method: 'GET',
       headers: {
         'x-access-token': localStorage.getItem('token')
       },
     })
-    const res = await response.json();
-    console.log(res);
-    if(res.code === 403) 
-      window.location.href = '/login';
+    const data = await response.json();
+    // console.log(data.data, "###");
+    setStories(data.data)
+    console.log(stories, "+++")
+
   }
+
   useEffect(() => {
-    authUser()
-	}, [])
+    getStories()
+    }, [])
+
 
   return (
     <><Menu /><div className="App">
       <h1>Home</h1>
+      {
+        stories.map((val)=> {
+          return (
+            <div>
+                <p>Title: {val.title} | Author: {val.author} | Published on: {val.create_time} </p>
+                <p>{val.content}</p>
+                <button>UpVote</button>
+                <button>DownVote</button>
+                <button>Comment</button>
+            </div>
+          )
+        })
+      }
     </div></>
   );
 }

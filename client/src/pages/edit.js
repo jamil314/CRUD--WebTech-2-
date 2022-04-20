@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import Menu from './menu'
-const Create = () =>{
+import React, { useState, useEffect } from "react";
+
+function Edit(prop) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [id, setId] = useState(0);
 
-    async function createStory(event){
+    async function editStory(event){
         event.preventDefault();
-        const response = await fetch('http://localhost:3001/api/createstory', {
+        const response = await fetch('http://localhost:3001/api/editstory', {
           method: 'POST',
           headers: {
             'x-access-token': localStorage.getItem('token'),
@@ -14,37 +15,47 @@ const Create = () =>{
           },
           body: JSON.stringify({
             title,
-            body
+            body,
+            id
           }),
         })
         const res = await response.json();
         console.log(res);
-        alert("Created New Post")
+        alert("Post Updated")
         window.location.href = '/profile'
       }
 
-    return (
-        <><Menu /><div className="App">
-            <h1>Create</h1>
-            <form onSubmit={createStory}>
+
+      useEffect(() => {
+        setTitle(prop.title)
+        setBody(prop.body)
+        setId(prop.id)
+        }, [])
+
+
+  return (prop.trigger === prop.id? (
+    <div className='popup'>
+        <div className='App'>
+            <h1>Edit</h1>
+            <form onSubmit={editStory}>
             <input
                 value={title} 
                 onChange={e => setTitle(e.target.value)}
                 type="text" 
-                placeholder="Title" 
             />
             <br/>
             <input
                 value={body} 
                 onChange={e => setBody(e.target.value)}
                 type="text" 
-                placeholder="Body" 
             />
             <br/>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Update" />
+            {prop.children}
             </form>
-        </div></>
-      );
+        </div>
+    </div>
+  ) :"")
 }
 
-export default Create;
+export default Edit
