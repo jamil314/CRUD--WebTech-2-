@@ -50,6 +50,14 @@ exports.updateStory = (id, title, body, callback) => {
     });
 }
 
+exports.updateProfile = (name, email, password, id, callback) => {
+    const dateTime = new Date();
+    pool.query(`UPDATE user SET name = '${name}', email ='${email}', password='${password}' WHERE id = ${id};`, (err, results) => {
+        if(err) throw err;
+        callback(results);
+    });
+}
+
 
 exports.removeStory = (id, callback) => {
     pool.query(`DELETE FROM story WHERE id=${id}`, (err, results) => {

@@ -7,24 +7,26 @@ const jwt = require('jsonwebtoken')
 app.use(cors())
 app.use(express.json())
 
-app.get('/api/auth', (req, res) =>{
-    const token = req.headers['x-access-token']
+
+getId = (token, secret) =>{
     try {
-        if(jwt.verify(token, 'verysecretkey')){
-            console.log('Token valid: ', token)
-
-            const decoded = jwt.decode(token, 'verysecterkey')
-            console.log('decoded ID: ',decoded.id)
-
-            res.json({code:200})
+        if(jwt.verify(token, secret)){
+            const decoded = jwt.decode(token, secret)
+            return decoded.id
         }else {
-            console.log('Token invalid')
-            res.json({code:403})
+            return -1;
         }
     } catch (TokenExpiredError) {
-        console.log('Token expired')
-        res.json({code:403})
+        return -1;
     }
+}
+
+
+app.get('/api/auth', (req, res) =>{
+    const token = req.headers['x-access-token']
+    const id = getId(token, 'verysecretkey')
+    if(id === -1) res.json({code: 403, message: 'Invalid Token'})
+    else res.json({code: 200, id})
 })
 
 
@@ -97,6 +99,15 @@ app.post('/api/editstory', (req, res) =>{
     res.json({response:'updated', code:200})
 })
 
+app.post('/api/editprofile', (req, res) =>{
+    const token = req.headers['x-access-token']
+    const id = getId(token, 'verysecretkey')
+    DbHandler.updateProfile(req.body.name, req.body.email, req.body.password, id, (success) => {
+        console.log(success)
+    })
+    res.json({response:'updated', code:200})
+})
+
 
 
 app.get('/api/getsories', (req, res) => {
@@ -108,20 +119,16 @@ app.get('/api/getsories', (req, res) => {
 
 
 
-app.get('/api/getsoriesfrom', (req, res) => {
-    const token = req.headers['x-access-token']
-    const decoded = jwt.decode(token, 'verysecterkey')
-    const id = decoded.id
+app.post('/api/getsoriesfrom', (req, res) => {
+    const id = req.body.owner
     DbHandler.fetchStoryFrom(id, (stories) => {
         res.json({data:stories})
     })
 })
 
 
-app.get('/api/getprofile', (req, res) => {
-    const token = req.headers['x-access-token']
-    const decoded = jwt.decode(token, 'verysecterkey')
-    const id = decoded.id
+app.post('/api/getprofile', (req, res) => {
+    const id = req.body.owner
     DbHandler.fetchProfile(id, (profile) => {
         res.json({data:profile})
     })

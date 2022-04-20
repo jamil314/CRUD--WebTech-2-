@@ -30,7 +30,8 @@ const Home = () => {
         stories.map((val)=> {
           return (
             <div>
-                <p>Title: {val.title} | Author: {val.author} | Published on: {val.create_time} </p>
+                Title: {val.title} Published on: {val.create_time} 
+                | Author: <a href={`/profile/${val.uploader}`}>{val.author}</a>
                 <p>{val.content}</p>
                 <button>UpVote</button>
                 <button>DownVote</button>

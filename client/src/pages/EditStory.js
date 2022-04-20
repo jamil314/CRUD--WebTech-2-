@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Edit(prop) {
+function EditStory(prop) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [id, setId] = useState(0);
@@ -58,4 +58,4 @@ function Edit(prop) {
   ) :"")
 }
 
-export default Edit
+export default EditStory
