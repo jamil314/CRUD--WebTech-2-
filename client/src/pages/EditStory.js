@@ -21,12 +21,13 @@ function EditStory(prop) {
         })
         const res = await response.json();
         console.log(res);
-        alert("Post Updated")
+        alert("Story Updated")
         window.location.href = '/profile'
       }
 
 
       useEffect(() => {
+        console.log(prop);
         setTitle(prop.title)
         setBody(prop.body)
         setId(prop.id)

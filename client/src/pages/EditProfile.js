@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 function EditProfile(prop) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [name, setName] = useState(prop.profile.name);
+    const [email, setEmail] = useState(prop.profile.email);
+    console.log(prop);
     async function editProfile(event) {
         event.preventDefault();
         const response = await fetch('http://localhost:3001/api/editprofile', {
@@ -16,7 +15,6 @@ function EditProfile(prop) {
             body: JSON.stringify({
                 name,
                 email,
-                password
             }),
           })
           const res = await response.json();
@@ -26,11 +24,10 @@ function EditProfile(prop) {
     }
 
     useEffect(() => {
-        setName(prop.name)
-        setEmail(prop.email)
-        setPassword(prop.password)
-        console.log(name, email, password);
-    }, [])
+        console.log(prop);
+        setName(prop.profile.name);
+        setEmail(prop.profile.email)
+    }, [prop])
 
   return (prop.trigger ? ( 
       <div>
@@ -45,12 +42,6 @@ function EditProfile(prop) {
                 <input
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    type="text"
-                />
-                <br/>
-                <input
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
                     type="text"
                 />
                 <br/>

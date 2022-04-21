@@ -6,11 +6,6 @@ const pool = createPool({
     database: 'CRUD'
 });
 
-pool.query(`select * from user`, (err, results) => {
-    if(err) throw err;
-    console.log(results);
-});
-
 exports.userExists = (username, callback) => {
     pool.query(`select * from user where username = '${username}'`, (err, results) => {
         if(err) throw err;
@@ -32,6 +27,39 @@ exports.loginUser = (username, password, callback) => {
     });
 }
 
+exports.verifyPassword = (id, password, callback) => {
+    console.log('verifying password ', id, password);
+    console.log(`select * from user where id = ${id} and password = '${password}'`);
+    pool.query(`select * from user where id = ${id} and password = '${password}'`, (err, results) => {
+        callback(results.length > 0 ? results[0].id : -1);
+    });
+}
+
+exports.updateProfile = (name, email, id, callback) => {
+    const dateTime = new Date();
+    pool.query(`UPDATE user SET name = '${name}', email ='${email}' WHERE id = ${id};`, (err, results) => {
+        if(err) throw err;
+        callback(results);
+    });
+}
+
+exports.changePassword = (id, password, callback) => {
+    const dateTime = new Date();
+    pool.query(`UPDATE user SET password = '${password}' WHERE id = ${id};`, (err, results) => {
+        if(err) throw err;
+        callback(results);
+    });
+}
+
+exports.fetchProfile = (id, callback) => {
+    console.log("fetchProfile: ",id);
+    pool.query(`select * from user where id =${id}`, (err, results) => {
+        if(err) throw err;
+        callback(results[0]);
+        console.log(results);
+    });
+}
+
 exports.createStory = (id, name, title, body, callback) => {
     console.log('creating storyryyyy');
     const dateTime = new Date();
@@ -50,22 +78,12 @@ exports.updateStory = (id, title, body, callback) => {
     });
 }
 
-exports.updateProfile = (name, email, password, id, callback) => {
-    const dateTime = new Date();
-    pool.query(`UPDATE user SET name = '${name}', email ='${email}', password='${password}' WHERE id = ${id};`, (err, results) => {
-        if(err) throw err;
-        callback(results);
-    });
-}
-
-
 exports.removeStory = (id, callback) => {
     pool.query(`DELETE FROM story WHERE id=${id}`, (err, results) => {
         if(err) throw err;
         callback(results);
     });
 }
-
 
 exports.fetchStory = (callback) => {
     console.log('getting story from db');
@@ -80,15 +98,6 @@ exports.fetchStoryFrom = (id, callback) => {
     pool.query(`select * from story where uploader =${id}`, (err, results) => {
         if(err) throw err;
         callback(results);
-        console.log(results);
-    });
-}
-
-exports.fetchProfile = (id, callback) => {
-    console.log("fetchProfile: ",id);
-    pool.query(`select * from user where id =${id}`, (err, results) => {
-        if(err) throw err;
-        callback(results[0]);
         console.log(results);
     });
 }

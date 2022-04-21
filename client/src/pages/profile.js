@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Menu from './menu'
 import EditStory from "./EditStory";
 import EditProfile from "./EditProfile";
+import ChangePassword from "./ChangePassword";
 
 const Profile = () =>{
     const {id} = useParams();
@@ -13,6 +14,7 @@ const Profile = () =>{
     const [profile, setProfile] = useState({})
     const [editStoryMode, setEditStoryMode] = useState(-1)
     const [editProfileMode, setEditProfileMode] = useState(false)
+    const [changePasswordMode, setChangePasswordMode] = useState(false)
     const [isOwner, setIsOwner] = useState(false)
 
     async function getStories(){
@@ -70,9 +72,9 @@ const Profile = () =>{
 
 
 
-    async function deletePost(pid){
+    async function deleteStory(pid){
         console.log(pid)
-        const response = await fetch('http://localhost:3001/api/deletepost', {
+        const response = await fetch('http://localhost:3001/api/deletestory', {
             method: 'POST',
             headers: {
             'x-access-token': localStorage.getItem('token'),
@@ -98,19 +100,27 @@ const Profile = () =>{
             <p>Name: {profile.name}</p>
             <p>Username: {profile.username}</p>
             <p>Email: {profile.email}</p>
-            {isOwner && <button onClick={() => setEditProfileMode(true)}>Edit Profile</button>}
-            <EditProfile trigger={editProfileMode} name={profile.name} email={profile.email} password={profile.password}>
+
+            {isOwner ? <button onClick={() => setEditProfileMode(true) }>Edit Profile</button>:<button>Poke</button>}
+            
+            <EditProfile trigger={editProfileMode} profile={profile} >
                 <button onClick={() => setEditProfileMode(false)}>Cancel</button>
             </EditProfile>
+
+            {isOwner ? <button onClick={() => setChangePasswordMode(true) }>Change Password</button>:null}
             
+            <ChangePassword trigger={changePasswordMode} profile={profile} >
+                <button onClick={() => setChangePasswordMode(false)}>Cancel</button>
+            </ChangePassword>
+
             {
                 stories.map((val)=> {
                     return (
                         <div>
                             <p>Title: {val.title} | Published on: {val.create_time}</p>
                             <p>{val.content}</p>
-                            {isOwner?<button onClick={() => setEditStoryMode(val.id)}>Edit Post</button>:null}
-                            {isOwner?<button onClick={() => deletePost(val.id)}>Delete</button>:null}
+                            {isOwner?<button onClick={() => setEditStoryMode(val.id)}>Edit Story</button>:null}
+                            {isOwner?<button onClick={() => deleteStory(val.id)}>Delete</button>:null}
                             <EditStory trigger={editStoryMode} title={val.title} body={val.content} id={val.id}>
                                 <button onClick={() => setEditStoryMode(-1)}>Cancel</button>
                             </EditStory>
