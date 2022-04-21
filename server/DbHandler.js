@@ -64,8 +64,10 @@ exports.createStory = (id, name, title, body, callback) => {
     console.log('creating storyryyyy');
     const dateTime = new Date();
     console.log(dateTime, id, name, title, body);
+    console.log(`insert into story (uploader, author, title, content, create_time, update_time) values (${id}, '${name}', '${title}', '${body}', '${dateTime}', '${dateTime}')`);
     pool.query(`insert into story (uploader, author, title, content, create_time, update_time) values (${id}, '${name}', '${title}', '${body}', '${dateTime}', '${dateTime}')`, (err, results) => {
         if(err) throw err;
+        console.log(results);
         callback(results);
     });
 }

@@ -69,7 +69,7 @@ app.post('/api/login', (req, res) => {
                             expiresIn: '3000s' 
                         }
                         )
-                        res.json({code: 200, message: 'login sucessful', token: token})
+                        res.json({code: 200, message: 'login sucessful', token: token, id: id})
                     }
                     else res.json({ code:403, message: 'login failed!! wrong password' })
                 })

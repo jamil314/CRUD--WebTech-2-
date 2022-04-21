@@ -30,27 +30,27 @@ function EditProfile(prop) {
     }, [prop])
 
   return (prop.trigger ? ( 
-      <div>
-          <h1>Edit Profile</h1>
-            <form onSubmit={editProfile}>
+      <div className="popup">
+            <div className="edit_profile_popup">
+                <h1>Edit Profile</h1>
                 <input
                     value={name}
                     onChange={e => setName(e.target.value)}
                     type="text"
                 />
-                <br/>
                 <input
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     type="text"
                 />
-                <br/>
-                <input type="submit" value="Update" />
-            </form>
+                <div className="linear">
+                    <button className="btn" onClick={editProfile}>Save</button>
+                    {prop.children}
+                </div>
+            </div>
 
-        {prop.children}
       </div>
-  ) :"")
+  ) : "")
 }
 
 export default EditProfile

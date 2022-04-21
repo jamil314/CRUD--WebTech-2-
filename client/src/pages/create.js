@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Menu from './menu'
-const Create = () =>{
+import React, { useState, useEffect } from "react";
+const Create = (prop) =>{
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [done, setDone] = useState(false);
 
     async function createStory(event){
         event.preventDefault();
@@ -20,31 +20,48 @@ const Create = () =>{
         const res = await response.json();
         console.log(res);
         alert("Created New Post")
-        window.location.href = '/profile'
+        setTitle('')
+        setBody('')
+        prop.done()
       }
 
-    return (
-        <><Menu /><div className="App">
-            <h1>Create</h1>
-            <form onSubmit={createStory}>
-            <input
-                value={title} 
-                onChange={e => setTitle(e.target.value)}
-                type="text" 
-                placeholder="Title" 
-            />
-            <br/>
-            <input
-                value={body} 
-                onChange={e => setBody(e.target.value)}
-                type="text" 
-                placeholder="Body" 
-            />
-            <br/>
-            <input type="submit" value="Create" />
-            </form>
-        </div></>
-      );
+	  useEffect(() => {
+        setDone(false)
+        }, [prop])
+
+
+      return (prop.trigger && !done? (
+        <div className='popup'>
+            <div className='popup_card center'>
+                <div className="popup_header">
+                  <h1>Create Story</h1>
+                </div>
+                <div className="popup_body">
+                  <div className="left">
+                    Title:
+                  </div>
+                  <textarea
+                      value={title} 
+                      onChange={e => setTitle(e.target.value)}
+                      type="text" 
+                  />
+                  <div className="left">
+                	Story:
+                  </div>
+                  <textarea
+                    className="input_story"
+                      value={body} 
+                      onChange={e => setBody(e.target.value)}
+                      type="text" 
+                  />
+                </div>
+                <div className="popup_footer">
+                  <button onClick={createStory}>Post</button>
+                  {prop.children}
+                </div>
+            </div>
+        </div>
+      ) :"")
 }
 
 export default Create;

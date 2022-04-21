@@ -1,3 +1,275 @@
+:root{
+  --bg_primary: rgba(3,3,3,255);
+  --bg_light: rgba(52,53,54,255);
+  --bg_secondary: rgba(26,26,27,255);
+  --text_primary: rgba(199,202,204,255);
+  --border: rgba(44,45,46,255);
+}
 .App {
-  text-align: center;
+  background: var(--bg_primary);
+  color: var(--text_primary);
+  padding-top: 80px;
+  min-height: 88.3vh;
+}
+
+.App2 {
+  background: var(--bg_primary);
+  color: var(--text_primary);
+  height: 100vh;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.center2{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login{
+  height: 50%;
+}
+
+
+
+
+.menuHolder{
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.menu{
+  background: var(--bg_secondary);
+  color: var(--text_primary);
+  border-radius: 5px;
+  margin: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+  display: flex;
+  justify-content: space-around;
+}
+.menu a{
+  color: var(--text_primary);
+  text-decoration: none;
+  padding: 20px ;
+}
+.menu input{
+  color: var(--text_primary);
+  background: var(--bg_light);
+  padding: 20px ;
+  border-radius: 50px;
+}
+.menu a:hover{
+  background: var(--text_primary);
+  color: var(--bg_secondary);
+  border-radius: 5px;
+}
+
+.profile{
+  background: var(--bg_secondary);
+  color: var(--text_primary);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+  padding: 10px;
+}
+
+.edit_profile_popup{
+  width: 20vw;
+  height: 35vh;
+  background: var(--bg_secondary);
+  color: var(--text_primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+}
+
+.edit_profile_popup input{
+  color: var(--text_primary);
+  background: var(--bg_light);
+  padding: 5px ;
+  border-radius: 10px;
+}
+
+.change_pass_pop{
+  width: 30vw;
+  height: 50vh;
+  background: var(--bg_secondary);
+  padding: 20px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+}
+
+.change_pass_pop input{
+  color: var(--text_primary);
+  background: var(--bg_light);
+  padding: 5px ;
+  border-radius: 10px;
+}
+
+.card {
+  width: 50vw;
+  justify-content: left;
+  align-items: left;
+  background: var(--bg_secondary);
+  border-radius: 5px;
+  padding: 20px;
+  margin: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+}
+.card2 {
+  width: 80vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: var(--bg_secondary);
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: var(--border);
+}
+
+.reg_err{
+  width: 30%;
+}
+
+#card_reg{
+  height: 85vh;
+}
+
+.card2 a{
+  color: yellow;
+  text-decoration: none;
+}
+
+.login_shape{
+  color: var(--text_primary);
+  background: var(--bg_light);
+  padding: 10px 20px;
+  border-radius: 50px;
+  width: 20vw;
+  margin: 10px;
+}
+
+.card:hover{
+  border-color: var(--text_primary);
+}
+.card-header{
+  font-size: 0.8em;
+}
+.card-header a{
+  color: var(--text_primary);
+  text-decoration: none;
+}
+.card-header a:hover{
+  text-decoration: underline;
+}
+
+.card-footer{
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  color: var(--text_primary);
+  background: var(--bg_secondary);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+  padding: 8px 20px;
+  margin: 0px 10px;
+}
+
+button:hover{
+  background: var(--text_primary);
+  color: var(--bg_secondary);
+}
+
+.popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.popup_card{
+  background: var(--bg_secondary);
+  width: 60vw;
+  height: 75vh;
+  border-radius: 25px;
+  justify-content: center;
+}
+
+.popup_body{
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.popup textarea{
+  padding: 5px 5px;
+  color: var(--text_primary);
+  background: var(--bg_light);
+  border-radius: 15px;
+  width: 50vw;
+}
+
+.popup_footer{
+  width: 50vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.input_story{
+  height: 25vh;
+}
+
+.left{
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  justify-content: left;
+}
+
+.linear{
+  display: flex;
 }

@@ -64,44 +64,41 @@ function ChangePassword(prop) {
         }
 
   return (prop.trigger ? ( 
-      <div>
-          <h1>Change Password</h1>
-            <form onSubmit={changePassword}>
+      <div className="popup">
+            <div className="change_pass_pop center">
+                <h1>Change Password</h1>
                 <input
                     value={oldPassword} 
                     onChange={e => [setOldPassword(e.target.value), verifyPassword(e.target.value)]}
                     type="text" 
                     placeholder="Old Password" 
                 />
-                <br/>
-                <p style={{color:passwordVerificationColor}}>
+                <pre style={{color:passwordVerificationColor}}>
                     {passwordVerificationMsg}
-                </p>
+                </pre>
                 <input
                     value={newPassword} 
                     onChange={e => [setNewPassword(e.target.value), validatePasswordLength(e.target.value)]}
                     type="text" 
                     placeholder="New Password" 
                 />
-                <br/>
-                <p style={{color:passwordLengthValidationColor}}>
+                <pre style={{color:passwordLengthValidationColor}}>
                     {passwordLengthValidationMsg}
-                </p>
-                <br/>
+                </pre>
                 <input
                     onChange={e => validatePassword(e.target.value)}
                     type="text" 
                     placeholder="Confirm Password" 
                 />
-                <br/>
-                <p style={{color:passwordValidationColor}}>
+                <pre style={{color:passwordValidationColor}}>
                     {passwordValidationMsg}
-                </p>
-                <br/>
-                <input type="submit" value="Update" />
-            </form>
+                </pre>
+                <div className="linear">
+                    <button className="btn" onClick={changePassword}>Save</button>
+                    {prop.children}
+                </div>
+            </div>
 
-        {prop.children}
       </div>
   ) :"")
 }

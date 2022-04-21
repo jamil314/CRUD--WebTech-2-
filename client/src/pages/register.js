@@ -6,11 +6,11 @@ function Register() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [usernameValidationMsg, setUsernameValidationMsg] = useState('');
+  const [usernameValidationMsg, setUsernameValidationMsg] = useState(' ');
   const [usernameValidationColor, setUsernameValidationColor] = useState('Green');
-  const [passwordValidationMsg, setPasswordValidationMsg] = useState('');
+  const [passwordValidationMsg, setPasswordValidationMsg] = useState(' ');
   const [passwordValidationColor, setPasswordValidationColor] = useState('Green');
-  const [passwordLengthValidationMsg, setPasswordLengthValidationMsg] = useState('');
+  const [passwordLengthValidationMsg, setPasswordLengthValidationMsg] = useState(' ');
   const [passwordLengthValidationColor, setPasswordLengthValidationColor] = useState('Green');
 
   async function registerUser(event){
@@ -72,60 +72,79 @@ function Register() {
     }
 
   return (
-    <div class='App'>
-      <h1>Register</h1>
-      <form onSubmit={registerUser}>
-        <input
-          value={name} 
-          onChange={e => setName(e.target.value)}
-          type="text" 
-          placeholder="Name" 
-        />
-        <br/>
-        <input
-          value={email} 
-          onChange={e => setEmail(e.target.value)}
-          type="text" 
-          placeholder="Email" 
-        />
-        <br/>
-        <input
-          value={username} 
-          onChange={e =>[setUsername(e.target.value), validateUsename(e.target.value)]}
-          type="text" 
-          placeholder="Username" 
-        />
-        <br/>
-        <p style={{color:usernameValidationColor}}>
-            {usernameValidationMsg}
-        </p>
-        <br/>
-        <input
-          value={password} 
-          onChange={e => [setPassword(e.target.value), validatePasswordLength(e.target.value)]}
-          type="text" 
-          placeholder="Password" 
-        />
-        <br/>
-        <p style={{color:passwordLengthValidationColor}}>
-            {passwordLengthValidationMsg}
-        </p>
-        <br/>
-        <input
-          onChange={e => validatePassword(e.target.value)}
-          type="text" 
-          placeholder="Confirm Password" 
-        />
-        <br/>
-        <p style={{color:passwordValidationColor}}>
-            {passwordValidationMsg}
-        </p>
-        <br/>
-        <input type="submit" value="Register" />
-        <br/>
-        <p>Have an account?</p>
-        <a href="/login">Log in</a>
-      </form>
+
+    <div class='App2 center'>
+      <div className='card2 center' id="card_reg">
+        <h1>Register</h1>
+        <div className='login center2'>
+
+        <div className='continue_with center'>
+            <button className='login_shape'>Continue With Google</button>
+            <button className='login_shape'>Continue With Facebook</button>
+            <button className='login_shape'>Continue With Apple</button>
+            <button className='login_shape'>Continue With Microsoft</button>
+          </div>
+
+
+          <div className='login_with_cred left'>
+            <input
+              className='login_shape'
+              value={name} 
+              onChange={e => setName(e.target.value)}
+              type="text" 
+              placeholder="Name" 
+            />
+            <input
+              className='login_shape'
+              value={email} 
+              onChange={e => setEmail(e.target.value)}
+              type="text" 
+              placeholder="Email" 
+            />
+            <div className='linear'>
+              <input
+                className='login_shape'
+                value={username} 
+                onChange={e =>[setUsername(e.target.value), validateUsename(e.target.value)]}
+                type="text" 
+                placeholder="Username" 
+              />
+              <p style={{color:usernameValidationColor}}>{usernameValidationMsg}</p>
+            </div>
+            <div className='linear'>
+              <input
+                className='login_shape'
+                value={password} 
+                onChange={e => [setPassword(e.target.value), validatePasswordLength(e.target.value)]}
+                type="text" 
+                placeholder="Password" 
+              />
+              <p style={{color:passwordLengthValidationColor}}>{passwordLengthValidationMsg}</p>
+            </div>
+            <div className='linear'>
+              <input
+                className='login_shape'
+                onChange={e => validatePassword(e.target.value)}
+                type="text" 
+                placeholder="Confirm Password" 
+              />
+              <p style={{color:passwordValidationColor}}>{passwordValidationMsg}</p>
+            </div>
+          </div>
+          
+          
+
+        </div>
+        <div className='center'>
+            <button className='login_shape' onClick={registerUser}>Register</button>
+            <pre className='linear'>
+              Have an account? <a href="/login">Login</a>
+            </pre>
+          <pre className='linear '>
+            By continuing, you agree to our <a href='/terms'>Terms of Service</a> and <a href='/privacy'>Privacy Policy</a>.
+          </pre>
+        </div>
+      </div>
     </div>
   );
 }

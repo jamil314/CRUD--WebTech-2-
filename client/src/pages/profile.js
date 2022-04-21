@@ -94,38 +94,73 @@ const Profile = () =>{
         authUser()
       }, [])
 
+      function editDone(){
+        setEditStoryMode(-1)
+      }
+
+
     return (
-        <><Menu /><div className="App">
-            <h1>Profile</h1>
-            <p>Name: {profile.name}</p>
-            <p>Username: {profile.username}</p>
-            <p>Email: {profile.email}</p>
+        <><Menu /><div className="App center">
+          <div className="profile">
+            <pre>Name: {profile.name}</pre>
+            <pre>Username: {profile.username}</pre>
+            <pre>Email: {profile.email}</pre>
+            <div className="linear">
+              {isOwner ? <button className="btn" onClick={() => setEditProfileMode(true) }>Edit Profile</button>:<button>Poke</button>}
 
-            {isOwner ? <button onClick={() => setEditProfileMode(true) }>Edit Profile</button>:<button>Poke</button>}
-            
-            <EditProfile trigger={editProfileMode} profile={profile} >
-                <button onClick={() => setEditProfileMode(false)}>Cancel</button>
-            </EditProfile>
+              <EditProfile trigger={editProfileMode} profile={profile} >
+                  <button className="btn" onClick={() => setEditProfileMode(false)}>Cancel</button>
+              </EditProfile>
 
-            {isOwner ? <button onClick={() => setChangePasswordMode(true) }>Change Password</button>:null}
-            
+              {isOwner ? <button onClick={() => setChangePasswordMode(true) }>Change Password</button>:null}
             <ChangePassword trigger={changePasswordMode} profile={profile} >
                 <button onClick={() => setChangePasswordMode(false)}>Cancel</button>
             </ChangePassword>
+            </div> 
+          </div>
+
+            
 
             {
                 stories.map((val)=> {
                     return (
-                        <div>
-                            <p>Title: {val.title} | Published on: {val.create_time}</p>
-                            <p>{val.content}</p>
-                            {isOwner?<button onClick={() => setEditStoryMode(val.id)}>Edit Story</button>:null}
-                            {isOwner?<button onClick={() => deleteStory(val.id)}>Delete</button>:null}
-                            <EditStory trigger={editStoryMode} title={val.title} body={val.content} id={val.id}>
-                                <button onClick={() => setEditStoryMode(-1)}>Cancel</button>
-                            </EditStory>
+                      <div className="card">
+                      <div className="card-header">
+                        Posted by <a href={`/profile/${val.uploader}`}>{val.author}</a> on {val.create_time}
+                      </div>
+                      <div className="card-body">
+                        <h1>{val.title}</h1>
+                        <p>{val.content}</p>
+                      </div>
+                      <div className="card-footer">
+                      {
+                        isOwner ?
+                        <div className="modify">
+                          <button onClick={() => setEditStoryMode(val.id)}>Edit Story</button>
+                          <button onClick={() => deleteStory(val.id)}>Delete</button>
+                          <EditStory 
+                            trigger={editStoryMode} 
+                            title={val.title} 
+                            body={val.content} 
+                            id={val.id}
+                            done={editDone}
+                          >
+                              <button onClick={() => setEditStoryMode(-1)}>Cancel</button>
+                          </EditStory>
                         </div>
-                      )
+                        :
+                        <div className="votes">
+                          <button className="btn">UpVote</button>
+                          {val.upvote-val.downvote}
+                          <button className="btn">DownVote</button>
+                        </div>
+                      }
+                        <div className="comment">
+                          <button className="btn">Comment</button>
+                        </div>
+                      </div>
+                    </div>
+                    )
                 })
             }
         </div></>
