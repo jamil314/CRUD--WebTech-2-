@@ -37,7 +37,7 @@ const User = sequelize.define('user', {
         defaultValue: 0
     },
     last_posted: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: true
     },
     date_of_birth: {

@@ -7,7 +7,7 @@ const StoryBody = sequelize.define('story_body', {
         primaryKey: true,
     },
     body: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
     
     story: {

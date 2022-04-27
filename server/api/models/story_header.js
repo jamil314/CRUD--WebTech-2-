@@ -13,11 +13,11 @@ const StoryHeader = sequelize.define('story_header', {
         allowNull: false
     },
     uploaded_on: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
     },
     last_edited: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: true
     },
     parts: {
