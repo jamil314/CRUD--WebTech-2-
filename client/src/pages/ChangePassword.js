@@ -3,65 +3,86 @@ import React, { useState, useEffect } from "react";
 function ChangePassword(prop) {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [passwordVerificationMsg, setPasswordVerificationMsg] = useState('');
-    const [passwordVerificationColor, setPasswordVerificationColor] = useState('Red');
-    const [passwordValidationMsg, setPasswordValidationMsg] = useState('');
-    const [passwordValidationColor, setPasswordValidationColor] = useState('Red');
-    const [passwordLengthValidationMsg, setPasswordLengthValidationMsg] = useState('');
-    const [passwordLengthValidationColor, setPasswordLengthValidationColor] = useState('Red');
-    console.log(prop);
+	const [password2, setPassword2] = useState('');
+	const [passwordVerificationMsg, setPasswordVerificationMsg] = useState('');
+	const [passwordVerificationColor, setPasswordVerificationColor] = useState('Green');
+	const [passwordValidationMsg, setPasswordValidationMsg] = useState('');
+	const [passwordValidationColor, setPasswordValidationColor] = useState('Green');
+	const [passwordMatchMsg, setPasswordMatchMsg] = useState('');
+	const [passwordMatchColor, setPasswordMatchColor] = useState('Green');
+    
+    
     async function changePassword(event) {
         event.preventDefault();
-        const response = await fetch('http://localhost:3001/api/changepassword', {
-            method: 'POST',
+        const response = await fetch('http://localhost:3001/user/changepassword', {
+            method: 'PATCH',
             headers: {
-              'x-access-token': localStorage.getItem('token'),
-              'Content-Type': 'application/json'
+                'authorization': localStorage.getItem('token'),
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                password: newPassword
+                oldPassword,
+                newPassword
             }),
           })
-          const res = await response.json();
-          console.log(res);
-          alert("Password Changed")
-          window.location.href = '/profile'
+            const status = await response.status;
+            switch(status){
+                case 204:
+                    alert('Password changed successfully');
+                break;
+                case 401:
+                    alert('Invalid old password');
+                break;
+                case 500:
+                    alert('Server error');
+                break;
+            }
+            prop.done();
+
     }
 
 
     async function verifyPassword(password){
-    
         if(password.length <6){
             setPasswordVerificationMsg('Wrong password')
             setPasswordVerificationColor('red')
             return;
         }
-    
-        const response = await fetch('http://localhost:3001/api/verifypassword', {
-          method: 'POST',
-          headers: {
-            'x-access-token': localStorage.getItem('token'),
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              password: password
-          }),
-        })
-        const data = await response.json();
-        console.log(data);
-        setPasswordVerificationMsg(data.message)
-        setPasswordVerificationColor(data.code===200 ? 'green' : 'red')
+        
+        const response = await fetch('http://localhost:3001/user/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+				body: JSON.stringify({
+				username: prop.profile.username,
+				password
+			}),
+		})
+		const status = await response.status;
+		switch (status) {
+			case 200:
+                setPasswordVerificationMsg('Password verified')
+                setPasswordVerificationColor('Green')
+				break;
+			case 401:
+                setPasswordVerificationMsg('Wrong password')
+                setPasswordVerificationColor('red')
+                break;
+		}
+        
       }
     
-        function validatePassword(confirmPassword){
-            setPasswordValidationMsg( confirmPassword === newPassword ? 'Password matched': 'Password did not match')
-            setPasswordValidationColor(confirmPassword === newPassword ? 'green' : 'red')
-        }
-    
-        function validatePasswordLength(tempPassword){
-            setPasswordLengthValidationMsg( tempPassword.length<6 ? 'Password must be at least 6 characters long': '')
-            setPasswordLengthValidationColor(tempPassword.length<6 ? 'red' : 'green')
-        }
+       
+      function matchPassword(tmpPass1, tmpPass2){
+		setPasswordMatchMsg( tmpPass1 === tmpPass2 ? 'Password matched': 'Password did not match')
+		setPasswordMatchColor(tmpPass1 === tmpPass2 ? 'Green' : 'Red')
+	}
+
+	function validatePassword(tempPassword){
+		setPasswordValidationMsg( tempPassword.length<6 ? 'Password must be at least 6 characters long': '')
+		setPasswordValidationColor(tempPassword.length<6 ? 'Red' : 'Green')
+	}
 
   return (prop.trigger ? ( 
       <div className="popup">
@@ -78,20 +99,21 @@ function ChangePassword(prop) {
                 </pre>
                 <input
                     value={newPassword} 
-                    onChange={e => [setNewPassword(e.target.value), validatePasswordLength(e.target.value)]}
+                    onChange={e => [setNewPassword(e.target.value), validatePassword(e.target.value)
+                        , matchPassword(e.target.value, password2)]}
                     type="text" 
                     placeholder="New Password" 
                 />
-                <pre style={{color:passwordLengthValidationColor}}>
-                    {passwordLengthValidationMsg}
+                <pre style={{color:passwordValidationColor}}>
+                    {passwordValidationMsg}
                 </pre>
                 <input
-                    onChange={e => validatePassword(e.target.value)}
+                    onChange={e => [setPassword2(e.target.value), matchPassword(newPassword, e.target.value)]}
                     type="text" 
                     placeholder="Confirm Password" 
                 />
-                <pre style={{color:passwordValidationColor}}>
-                    {passwordValidationMsg}
+                <pre style={{color:passwordMatchColor}}>
+                    {passwordMatchMsg}
                 </pre>
                 <div className="linear">
                     <button className="btn" onClick={changePassword}>Save</button>

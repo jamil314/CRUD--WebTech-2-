@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../DB/mysql_stories');
 
-const StoryHeader = sequelize.define('story_header', {
+const Story = sequelize.define('story', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -20,14 +20,32 @@ const StoryHeader = sequelize.define('story_header', {
         type: Sequelize.BIGINT,
         allowNull: true
     },
-    parts: {
-        type: Sequelize.INTEGER,
-        default: 1
-    },
     uploader: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
+    },
+    uploader_name: {
+        type: Sequelize.STRING,
         allowNull: false
+    },
+    body: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
+    upvote: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    downvote: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     }
 });
 
-module.exports = StoryHeader;
+module.exports = Story;

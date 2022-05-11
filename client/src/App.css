@@ -38,8 +38,6 @@
 }
 
 
-
-
 .menuHolder{
   position: fixed;
   top: 0;
@@ -185,6 +183,7 @@
 }
 .card-header{
   font-size: 0.8em;
+  word-break: break-all;
 }
 .card-header a{
   color: var(--text_primary);
@@ -192,6 +191,10 @@
 }
 .card-header a:hover{
   text-decoration: underline;
+}
+
+.card-body p{
+  word-break: break-all;
 }
 
 .card-footer{
@@ -213,6 +216,7 @@ button {
 button:hover{
   background: var(--text_primary);
   color: var(--bg_secondary);
+  cursor: pointer;
 }
 
 .popup{
@@ -270,6 +274,24 @@ button:hover{
   justify-content: left;
 }
 
+.readMore{
+  display: flex;
+  justify-content: right;
+  padding-right: 4px;
+  color: skyblue;
+}
+
+.readMore a:hover{
+  cursor: pointer;
+  /* color: yellow; */
+  font-style: oblique;
+}
+
+
 .linear{
   display: flex;
+}
+
+.strikethrough{
+  text-decoration: line-through;
 }

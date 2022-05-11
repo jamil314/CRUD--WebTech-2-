@@ -1,17 +1,22 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
 
 const userRoutes = require('./api/routes/user');
-const storyHeaderRoutes = require('./api/routes/story_header');
-const storyBodyRoutes = require('./api/routes/story_body');
+const storyRoutes = require('./api/routes/story');
+const errorHandler = require('./api/middlewares/errorHandler');
 
 app.use(morgan('dev'));
-
+app.use(cors());
 app.use(express.json());
-app.use('/user', userRoutes);
-app.use('/story/header', storyHeaderRoutes);
-app.use('/story/body', storyBodyRoutes);
+
+const catchAsync = fn => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch((err) => {next(err);});
+}
+
+app.use('/user', catchAsync(userRoutes));
+app.use('/story', catchAsync(storyRoutes));
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
@@ -19,13 +24,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    res.json({
-        error: {
-            message: error.message
-        }
-    });
-});
+
+app.use(errorHandler);
 
 module.exports = app;

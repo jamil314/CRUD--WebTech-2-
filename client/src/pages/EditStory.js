@@ -4,38 +4,52 @@ function EditStory(prop) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [id, setId] = useState(0);
-    const [done, setDone] = useState(false);
     async function editStory(event){
         event.preventDefault();
-        const response = await fetch('http://localhost:3001/api/editstory', {
-          method: 'POST',
-          headers: {
-            'x-access-token': localStorage.getItem('token'),
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            title,
-            body,
-            id
-          }),
+        const response = await fetch('http://localhost:3001/story/'+id, {
+			method: 'PATCH',
+			headers: {
+				'authorization': localStorage.getItem('token'),
+				'Content-Type': 'application/json'
+			},
+				body: JSON.stringify({
+				title,
+				body,
+				id
+			}),
         })
-        const res = await response.json();
-        console.log(res);
-        alert("Story Updated")
-        // setDone(true);
-        prop.done()
+		const status = await response.status;
+		switch (status) {
+			case 204:
+				alert('Story updated')
+				prop.done(title, body)
+				break;
+			case 401:
+				alert('You are not logged in')
+				window.location.href = '/login'
+				break;
+			case 403:
+				alert('You are not the uploader of this story')
+				break;
+			case 404:
+				alert('Story not found')
+				break;
+			case 500:
+				alert('Something went wrong')
+				break;
+		}
+
       }
 
 
-      useEffect(() => {
-        console.log(prop);
-        setTitle(prop.title)
-        setBody(prop.body)
-        setId(prop.id)
-        }, [prop])
+	useEffect(() => {
+		setTitle(prop.title)
+		setBody(prop.body)
+		setId(prop.id)
+	}, [prop])
 
 
-  return (prop.trigger === prop.id && !done? (
+  return (prop.trigger === prop.id ? (
     <div className='popup'>
         <div className='popup_card center'>
             <div className="popup_header">
