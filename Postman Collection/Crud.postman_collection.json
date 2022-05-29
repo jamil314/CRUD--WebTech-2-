@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "03c98e79-e554-40ea-ac4e-2b9ce5833ace",
+		"name": "Crud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20592257"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Md. Jamilur Rahman\",\r\n    \"email\": \"jamil31415@gmail.com\",\r\n    \"username\": \"jamil31415\",\r\n    \"password\": \"easypass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/user/byid/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"byid",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWlsMzE0MTUiLCJ1c2VySWQiOjIsImlhdCI6MTY1Mzg0ODEwNiwiZXhwIjoxNjUzODUxNzA2fQ.VRAZJqrIkYlBOXPpYgB8HMvOBYMqcDYqgtYz-iQrlpI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_number\":\"01786623305\",\r\n    \"email\":\"j@g.co\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"jamil31415\",\r\n    \"password\":\"easypass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Username Availibility",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"jamil314\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/user/check",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"user",
+								"check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Story",
+			"item": [
+				{
+					"name": "Upload new story",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWlsMzE0MTUiLCJ1c2VySWQiOjIsImlhdCI6MTY1Mzg0ODEwNiwiZXhwIjoxNjUzODUxNzA2fQ.VRAZJqrIkYlBOXPpYgB8HMvOBYMqcDYqgtYz-iQrlpI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"first story\",\r\n    \"body\":\"this is the first story\",\r\n    \"uploaded_on\": 23424\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/story",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"story"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all stories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/story",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"story"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get story with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/story/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"story",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get story from specific uploader",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/story/from/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"story",
+								"from",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update story",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWlsMzE0MTUiLCJ1c2VySWQiOjIsImlhdCI6MTY1Mzg0ODEwNiwiZXhwIjoxNjUzODUxNzA2fQ.VRAZJqrIkYlBOXPpYgB8HMvOBYMqcDYqgtYz-iQrlpI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"last_edited\": 4332\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/story/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"story",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete story",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWlsMzE0MTUiLCJ1c2VySWQiOjIsImlhdCI6MTY1Mzg0ODEwNiwiZXhwIjoxNjUzODUxNzA2fQ.VRAZJqrIkYlBOXPpYgB8HMvOBYMqcDYqgtYz-iQrlpI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3001/story/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"story",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
