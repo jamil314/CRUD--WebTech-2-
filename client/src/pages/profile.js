@@ -26,9 +26,7 @@ const Profile = () =>{
 			method: 'GET',
 		})
 		const data = await response.json();
-		console.log(data);
 		setStories(data)
-		console.log(stories);
 	}
 
     async function getProfile(){

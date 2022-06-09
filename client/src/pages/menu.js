@@ -4,7 +4,6 @@ const Menu = () =>{
     const [createMode, setCreateMode] = useState(false)
     const [loggedIn, setloggedIn] = useState(false)
     async function auth(){
-        console.log(localStorage.getItem('token'));
         if(localStorage.getItem('token') === null){
             setloggedIn(false)
             localStorage.removeItem('userId')
@@ -42,7 +41,6 @@ const Menu = () =>{
     const gotoProfile = () =>{
         if(loggedIn){
             const userID = localStorage.getItem('userID')
-            console.log(userID);
             window.location.href='/profile/'+userID
         }else {
             alert('You must be logged in to view your profile')

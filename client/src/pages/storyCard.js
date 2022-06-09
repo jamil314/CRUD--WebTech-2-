@@ -54,7 +54,6 @@ function StoryCard(prop){
         switch (status) {
             case 200:
                 const data = await response.json();
-                console.log(data);
                 setStory(data)
                 setStoryTitle(data.title)
                 setStoryBody(data.body)
@@ -71,7 +70,6 @@ function StoryCard(prop){
     
     useEffect(() => {
         getStory()
-        console.log(id);
     }, [])
     
     const trim=(str, maxLength) => {

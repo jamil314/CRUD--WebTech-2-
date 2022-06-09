@@ -8,7 +8,6 @@ function Login() {
 
 	async function loginUser(event){
 		event.preventDefault();
-		console.log(username, password);
 		const response = await fetch('http://localhost:3001/user/login', {
 			method: 'POST',
 			headers: {

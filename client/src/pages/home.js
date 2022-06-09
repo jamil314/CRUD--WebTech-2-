@@ -9,7 +9,6 @@ const Home = () => {
 			method: 'GET',
 		})
 		const data = await response.json();
-		console.log(data);
 		setStories(data)
 	}
 

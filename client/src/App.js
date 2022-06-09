@@ -8,7 +8,6 @@ import Profile from "./pages/profile";
 import Register from "./pages/register";
 import Story from "./pages/story";
 const App = () => {
-	console.log("App is running");
 	return (
 		<BrowserRouter>
 			<Routes>

@@ -17,7 +17,6 @@ function Register() {
 	const [passwordMatchColor, setPasswordMatchColor] = useState('Green');
 
 	async function registerUser(event){
-		console.log(name, email, password)
 		event.preventDefault();
 
 		if(password !== password2){
@@ -38,7 +37,6 @@ function Register() {
 			}),
 		})
 		const status = await response.status;
-		console.log(status);
 		switch(status){
 			case 201:
 				alert('User registered successfully');
@@ -57,7 +55,6 @@ function Register() {
 	}
 
 	async function validateUsename(tempUserName){
-		console.log(tempUserName);
 		if(tempUserName.length <6){
 			setUsernameValidationMsg('Username must be at least 6 characters long')
 			setUsernameValidationColor('red')

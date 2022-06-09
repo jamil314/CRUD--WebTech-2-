@@ -5,7 +5,6 @@ function EditProfile(prop) {
     const [email, setEmail] = useState(prop.profile.email);
     const [phone, setPhone] = useState(prop.profile.phone_number);
     const [DOB, setDOB] = useState(prop.profile.date_of_birth);
-    console.log(prop);
     async function editProfile(event) {
         event.preventDefault();
         const response = await fetch('http://localhost:3001/user', {
@@ -37,7 +36,6 @@ function EditProfile(prop) {
     }
 
     useEffect(() => {
-        console.log(prop);
         setName(prop.profile.name);
         setEmail(prop.profile.email)
     }, [prop])
