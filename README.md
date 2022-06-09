@@ -2,8 +2,8 @@
 
 # How to run:
 - Step 1: Clone the project
-- Step 3: Rename example.env as .env and set it up (according to your local variables)
-- Step 2: Open two terminals and enter the commands
+- Step 3: Rename example.env(in server folder) as .env and set it up (according to your local variables)
+- Step 2: Open two terminals and enter the commands one by one
     - Terminal 1:
       ~~~bash
       cd server
