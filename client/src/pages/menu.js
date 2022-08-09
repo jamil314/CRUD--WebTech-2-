@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Create from "./create";
+import Switch from "./switch";
 const Menu = () =>{
     const [createMode, setCreateMode] = useState(false)
     const [loggedIn, setloggedIn] = useState(false)
@@ -61,6 +62,7 @@ const Menu = () =>{
             {loggedIn ? 
                 <button onClick={logOut}>Logout</button> : 
                 <button onClick={() => window.location.href='/login'}>Login</button>}
+            <Switch/>
         </div>
       </div>
       );

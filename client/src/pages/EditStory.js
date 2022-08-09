@@ -34,6 +34,9 @@ function EditStory(prop) {
 			case 404:
 				alert('Story not found')
 				break;
+      case 413:
+        alert('Story too long')
+        break;
 			case 500:
 				alert('Something went wrong')
 				break;

@@ -26,6 +26,9 @@ const Create = (prop) =>{
 				setTitle('')
 				setBody('')
 				break;
+			case 413:
+				alert('Story too long')
+				break;
 			default:
 				alert('Something went wrong')
 		}

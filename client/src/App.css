@@ -4,12 +4,38 @@
   --bg_secondary: rgba(26,26,27,255);
   --text_primary: rgba(199,202,204,255);
   --border: rgba(44,45,46,255);
+  --hover_contrast:rgba(199,202,204,255);
+  --switch_pos: 12px;
+  transition: 0.5s;
+
+}
+
+body.light{
+  --bg_primary: #9896f1;
+  --bg_light: #edb1f1;
+  --bg_secondary: #d59bf6;
+  --text_primary: #155263;
+  --border: #edb1f1;
+  --hover_contrast: #8ef6e4;
+  --switch_pos: 35px;
+
+}
+body.dark{
+  --bg_primary: rgba(3,3,3,255);
+  --bg_light: rgba(52,53,54,255);
+  --bg_secondary: rgba(26,26,27,255);
+  --text_primary: rgba(199,202,204,255);
+  --border: rgba(44,45,46,255);
+  --hover_contrast:rgba(199,202,204,255);
+  --switch_pos: 12px;
+
 }
 .App {
   background: var(--bg_primary);
   color: var(--text_primary);
   padding-top: 80px;
   min-height: 88.3vh;
+  transition: 0.5s;
 }
 
 .App2 {
@@ -67,7 +93,7 @@
   border-radius: 50px;
 }
 .menu a:hover{
-  background: var(--text_primary);
+  background: var(--hover_contrast);
   color: var(--bg_secondary);
   border-radius: 5px;
 }
@@ -179,7 +205,7 @@
 }
 
 .card:hover{
-  border-color: var(--text_primary);
+  border-color: var(--hover_contrast);
 }
 .card-header{
   font-size: 0.8em;
@@ -214,7 +240,7 @@ button {
 }
 
 button:hover{
-  background: var(--text_primary);
+  background: var(--hover_contrast);
   color: var(--bg_secondary);
   cursor: pointer;
 }
@@ -295,3 +321,51 @@ button:hover{
 .strikethrough{
   text-decoration: line-through;
 }
+
+.switch {
+  position: relative;
+  display: inline-block;
+}
+
+.switch input{
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+
+.slider {
+  background: var(--bg_light);
+  border-radius: 50px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+  margin: 0px 10px;
+  height: 25px;
+  width: 50px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  left: var(--switch_pos);
+  height: 25px;
+  width: 25px;
+  background: var(--bg_primary);
+  border-radius: 50%;
+  transition: .4s;
+}
+
+/* 
+input:checked + .slider {
+  background: var(--text_primary);
+} */
+
+/* input:checked + .slider:before {
+  transform: translateX(25px);
+  background: var(--bg_primary);
+  --bg_primary: #00bcd4;
+} */
+
