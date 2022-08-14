@@ -11,14 +11,21 @@
 }
 
 body.light{
-  --bg_primary: #9896f1;
+  /* --bg_primary: #9896f1;
   --bg_light: #edb1f1;
   --bg_secondary: #d59bf6;
   --text_primary: #155263;
   --border: #edb1f1;
   --hover_contrast: #8ef6e4;
-  --switch_pos: 35px;
+  --switch_pos: 35px; */
 
+  --bg_primary: gray;
+  --bg_light: white;
+  --bg_secondary: white;
+  --text_primary: black;
+  --border: gray;
+  --hover_contrast: black;
+  --switch_pos: 35px;
 }
 body.dark{
   --bg_primary: rgba(3,3,3,255);
